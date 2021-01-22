@@ -23,6 +23,29 @@ const AppProvider = ({ children }) => {
   const [error, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const fetchQuestions = async (url) => {
+    setLoading(true)
+    setWaiting(false)
+    const res = await axios.get(url).catch(err => console.log(err))
+    if (res) {
+      const data = res.data.results
+      if (data.length > 0) {
+        setQuestions(data)
+        setLoading(false)
+        setWaiting(false)
+        setError(false)
+      } else {
+        setWaiting(true)
+        setError(true)
+      }
+    } else {
+      setWaiting(true)
+    }
+  }
+
+  useEffect(() => {
+    fetchQuestions(tempUrl)
+  }, [])
 
   return <AppContext.Provider value={{ waiting, loading, questions, index, correct, error, isModalOpen }}>{children}</AppContext.Provider>
 }
