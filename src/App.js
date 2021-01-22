@@ -21,7 +21,7 @@ function App() {
 
   return (
     <main>
-      {/* <Modal /> */}
+      <Modal />
       <section className="quiz">
         <p className="correct-answers">
           correct answers : {correct}/{index}
@@ -30,12 +30,12 @@ function App() {
           <h2 dangerouslySetInnerHTML={{ __html: question }} />
           <div className="btn-container">
             {
-              answers.map((item, index) =>
+              answers.map((answer, index) =>
                 <button
                   key={index}
                   className="answer-btn"
-                  onClick={() => checkAnswer(correct_answer === item)}
-                  dangerouslySetInnerHTML={{ __html: item }} />
+                  onClick={() => checkAnswer(correct_answer === answer)}
+                  dangerouslySetInnerHTML={{ __html: answer }} />
               )
             }
           </div>
