@@ -54,11 +54,18 @@ const AppProvider = ({ children }) => {
     })
   }
 
+  const checkAnswer = value => {
+    if (value) {
+      setCorrect(prev => prev + 1)
+    }
+    nextQuestion()
+  }
+
   useEffect(() => {
     fetchQuestions(tempUrl)
   }, [])
 
-  return <AppContext.Provider value={{ waiting, loading, questions, index, correct, error, isModalOpen, nextQuestion }}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{ waiting, loading, questions, index, correct, error, isModalOpen, nextQuestion, checkAnswer }}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
